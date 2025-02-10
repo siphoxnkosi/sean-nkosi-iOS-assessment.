@@ -37,8 +37,8 @@
 		5DD01B4E27046B820032C29A /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD01B4C27046B820032C29A /* QuestionsViewController.swift */; };
 		5DD01B4F27046B820032C29A /* QuestionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD01B4D27046B820032C29A /* QuestionsViewController.xib */; };
 		5DD01B5227046C5B0032C29A /* QuestionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD01B5127046C5B0032C29A /* QuestionCardView.swift */; };
-		5DD01B5427046C790032C29A /* SelectableAwnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD01B5327046C790032C29A /* SelectableAwnswerView.swift */; };
-		5DD01B5627046CD00032C29A /* SelectableAwnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD01B5527046CD00032C29A /* SelectableAwnswerView.xib */; };
+		5DD01B5427046C790032C29A /* SelectableAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD01B5327046C790032C29A /* SelectableAnswerView.swift */; };
+		5DD01B5627046CD00032C29A /* SelectableAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD01B5527046CD00032C29A /* SelectableAnswerView.xib */; };
 		5DD01B5827046CDF0032C29A /* QuestionCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD01B5727046CDF0032C29A /* QuestionCardView.xib */; };
 		5DD01B5E27049AFA0032C29A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD01B5D27049AFA0032C29A /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -97,8 +97,8 @@
 		5DD01B4C27046B820032C29A /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		5DD01B4D27046B820032C29A /* QuestionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionsViewController.xib; sourceTree = "<group>"; };
 		5DD01B5127046C5B0032C29A /* QuestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCardView.swift; sourceTree = "<group>"; };
-		5DD01B5327046C790032C29A /* SelectableAwnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableAwnswerView.swift; sourceTree = "<group>"; };
-		5DD01B5527046CD00032C29A /* SelectableAwnswerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableAwnswerView.xib; sourceTree = "<group>"; };
+		5DD01B5327046C790032C29A /* SelectableAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableAnswerView.swift; sourceTree = "<group>"; };
+		5DD01B5527046CD00032C29A /* SelectableAnswerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableAnswerView.xib; sourceTree = "<group>"; };
 		5DD01B5727046CDF0032C29A /* QuestionCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionCardView.xib; sourceTree = "<group>"; };
 		5DD01B5D27049AFA0032C29A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -326,7 +326,7 @@
 			children = (
 				5D93CE282706F0AD00D5059C /* Cells */,
 				5DD01B5127046C5B0032C29A /* QuestionCardView.swift */,
-				5DD01B5327046C790032C29A /* SelectableAwnswerView.swift */,
+				5DD01B5327046C790032C29A /* SelectableAnswerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 				5D93CE2A2706F0DB00D5059C /* GlucodianTableViewCell.xib */,
 				5DD01B4D27046B820032C29A /* QuestionsViewController.xib */,
 				5DD01B5727046CDF0032C29A /* QuestionCardView.xib */,
-				5DD01B5527046CD00032C29A /* SelectableAwnswerView.xib */,
+				5DD01B5527046CD00032C29A /* SelectableAnswerView.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -446,7 +446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D93CE32270B08C900D5059C /* Standard.png in Resources */,
-				5DD01B5627046CD00032C29A /* SelectableAwnswerView.xib in Resources */,
+				5DD01B5627046CD00032C29A /* SelectableAnswerView.xib in Resources */,
 				5DAF4631270C3C820051DEAB /* Bug 4.mov in Resources */,
 				5D8DA23326E011B500418960 /* IntroductionViewController.xib in Resources */,
 				5D93CE40270C157A00D5059C /* Bug 3.png in Resources */,
@@ -500,7 +500,7 @@
 				5D8DA23226E011B500418960 /* IntroductionViewController.swift in Sources */,
 				5D93CE212705F3EA00D5059C /* EngineersTableViewController.swift in Sources */,
 				5D93CE232705F5B000D5059C /* Engineer.swift in Sources */,
-				5DD01B5427046C790032C29A /* SelectableAwnswerView.swift in Sources */,
+				5DD01B5427046C790032C29A /* SelectableAnswerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

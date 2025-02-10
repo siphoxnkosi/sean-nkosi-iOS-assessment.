@@ -1,6 +1,6 @@
 import UIKit
 
-class QuestionsViewController: UIViewController {
+class QuestionsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerStack: UIStackView!
     var questions: [Question] = []

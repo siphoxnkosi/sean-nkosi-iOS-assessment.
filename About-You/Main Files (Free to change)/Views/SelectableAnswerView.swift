@@ -1,14 +1,14 @@
 import UIKit
 
 protocol SelectionViewDelegate {
-    func didSelect(selectionview: SelectableAwnswerView)
+    func didSelect(selectionView: SelectableAnswerView)
 }
 
-class SelectableAwnswerView: UIView {
+class SelectableAnswerView: UIView {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak var highlightView: UIView!
 
-    @IBOutlet weak var tapgesture: UITapGestureRecognizer!
+    @IBOutlet weak var tapGesture: UITapGestureRecognizer!
 
     private var delegate: SelectionViewDelegate?
 
@@ -61,6 +61,6 @@ class SelectableAwnswerView: UIView {
 
     @IBAction func didTapView(_ sender: UITapGestureRecognizer) {
         applySelectionStyling()
-        delegate?.didSelect(selectionview: self)
+        delegate?.didSelect(selectionView: self)
     }
 }

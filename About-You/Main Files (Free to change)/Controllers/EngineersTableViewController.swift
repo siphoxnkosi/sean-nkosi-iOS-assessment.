@@ -72,7 +72,7 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = QuestionsViewController.loadController(with: engineers[indexPath.row].questions)
+        let controller = QuestionsViewController.loadController(with: engineers[indexPath.row])
         navigationController?.pushViewController(controller, animated: true)
     }
     

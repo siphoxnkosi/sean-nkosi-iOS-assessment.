@@ -26,6 +26,13 @@ class GlucodianTableViewCell: UITableViewCell {
            let image = UIImage(data: imageData) {
             profileImage.image = image
             return
+        } else if !engineer.defaultImageName.isEmpty {
+            profileImage.image = UIImage(named: engineer.defaultImageName)
+        } else {
+            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium)
+            profileImage.image = UIImage(systemName: "person.fill", withConfiguration: config)
+            profileImage.tintColor = .gray
+            profileImage.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         }
     }
     

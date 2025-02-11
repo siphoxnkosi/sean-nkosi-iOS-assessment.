@@ -16,6 +16,7 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
         reloadEngineerImages()
     }
     private func reloadEngineerImages() {
+        
         for i in 0..<engineers.count {
             if let imageData = CoreDataManager.shared.fetchEngineerImage(name: engineers[i].name) {
                 engineers[i].quickStats = engineers[i].quickStats
@@ -74,10 +75,15 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: GlucodianTableViewCell.self)) as? GlucodianTableViewCell
-        cell?.setUp(with: engineers[indexPath.row])
-        cell?.accessoryType = .disclosureIndicator
-        return cell ?? UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: GlucodianTableViewCell.self)) as? GlucodianTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let engineer = engineers[indexPath.row]
+        cell.setUp(with: engineer)
+        
+        cell.accessoryType = .disclosureIndicator
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -96,6 +102,8 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
         default:
             break
         }
+        
+        reloadEngineerImages()
         
         tableView.reloadData()
     }

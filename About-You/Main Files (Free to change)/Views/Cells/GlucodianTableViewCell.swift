@@ -31,8 +31,8 @@ class GlucodianTableViewCell: UITableViewCell {
         } else {
             let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium)
             profileImage.image = UIImage(systemName: "person.fill", withConfiguration: config)
-            profileImage.tintColor = .gray
-            profileImage.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+            profileImage.tintColor = .systemBlue
+            profileImage.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         }
     }
     

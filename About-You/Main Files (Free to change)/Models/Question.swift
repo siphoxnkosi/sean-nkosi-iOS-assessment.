@@ -3,7 +3,7 @@ import Foundation
 struct Question: Codable {
     let questionText: String
     let answerOptions: [String]
-    let questionType: String // SLIDER, SELECTION
+    let questionType: String
     let answer: Answer?
 
     enum CodingKeys: String, CodingKey {

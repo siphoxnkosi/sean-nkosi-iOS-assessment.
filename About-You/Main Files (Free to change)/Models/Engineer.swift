@@ -6,6 +6,7 @@ struct Engineer {
     var defaultImageName: String
     var quickStats: QuickStats
     var questions: [Question]
+    var profileImageData: Data? 
 }
 
 struct QuickStats {

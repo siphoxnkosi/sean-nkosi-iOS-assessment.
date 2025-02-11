@@ -13,6 +13,16 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationController()
+        reloadEngineerImages()
+    }
+    private func reloadEngineerImages() {
+        for i in 0..<engineers.count {
+            if let imageData = CoreDataManager.shared.fetchEngineerImage(name: engineers[i].name) {
+                engineers[i].quickStats = engineers[i].quickStats
+                engineers[i].profileImageData = imageData
+            }
+        }
+        tableView.reloadData()
     }
     
     private func setupNavigationController() {
@@ -55,7 +65,6 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
         return CGFloat.leastNormalMagnitude
     }
     
-    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -66,7 +75,7 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: GlucodianTableViewCell.self)) as? GlucodianTableViewCell
-        cell?.setUp(with: engineers[indexPath.row].name, role: engineers[indexPath.row].role)
+        cell?.setUp(with: engineers[indexPath.row])
         cell?.accessoryType = .disclosureIndicator
         return cell ?? UITableViewCell()
     }
@@ -77,7 +86,6 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
     }
     
     func didSelectOrder(by criterion: String) {
-        // Sort the engineers based on the selected criterion
         switch criterion {
         case "Years":
             engineers.sort { $0.quickStats.years < $1.quickStats.years }
@@ -89,7 +97,6 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
             break
         }
         
-        // Reload the table to reflect the new order
         tableView.reloadData()
     }
 }

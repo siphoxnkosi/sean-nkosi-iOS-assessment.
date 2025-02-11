@@ -23,6 +23,8 @@ class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationCon
     @IBOutlet weak var bugsLabel: UILabel!
     
     private var parentViewController: UIViewController?
+    private let coreDataManager = CoreDataManager.shared
+    private var engineerName: String = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +33,7 @@ class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationCon
     
     func setUp(with engineer: Engineer, parentVC: UIViewController) {
         self.parentViewController = parentVC
+        self.engineerName = engineer.name
         configureImage(for: engineer)
         configureLabels(for: engineer)
     }
@@ -61,10 +64,12 @@ class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationCon
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let selectedImage = info[.editedImage] as? UIImage {
+        if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             engineerImageView.image = selectedImage
-        } else if let originalImage = info[.originalImage] as? UIImage {
-            engineerImageView.image = originalImage
+            
+            if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
+                coreDataManager.saveEngineerImage(name: engineerName, imageData: imageData)
+            }
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -74,6 +79,15 @@ class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationCon
     }
     
     private func configureImage(for engineer: Engineer) {
+        if let savedImageData = coreDataManager.fetchEngineerImage(name: engineer.name),
+           let savedImage = UIImage(data: savedImageData) {
+            engineerImageView.image = savedImage
+        } else {
+            setDefaultImage(for: engineer)
+        }
+    }
+    
+    private func setDefaultImage(for engineer: Engineer) {
         if engineer.defaultImageName.isEmpty {
             let config = UIImage.SymbolConfiguration(pointSize: 40, weight: .medium)
             engineerImageView.image = UIImage(systemName: "person.fill", withConfiguration: config)
@@ -134,32 +148,26 @@ class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationCon
         }
         
         NSLayoutConstraint.activate([
-            // Engineer Image Constraints
             engineerImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             engineerImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             engineerImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             engineerImageView.widthAnchor.constraint(equalTo: engineerImageView.heightAnchor),
             
-            
-            // Name & Role Stack
             nameLabel.leadingAnchor.constraint(equalTo: engineerImageView.trailingAnchor, constant: 12),
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             roleLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             roleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
             
-            // Stats Container
             statsContainerView.topAnchor.constraint(equalTo: roleLabel.bottomAnchor, constant: 8),
             statsContainerView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             statsContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             statsContainerView.heightAnchor.constraint(equalToConstant: 40),
             
-            // Stats Stack View
             statsStackView.leadingAnchor.constraint(equalTo: statsContainerView.leadingAnchor, constant: 8),
             statsStackView.trailingAnchor.constraint(equalTo: statsContainerView.trailingAnchor, constant: -8),
             statsStackView.topAnchor.constraint(equalTo: statsContainerView.topAnchor, constant: 4),
             statsStackView.bottomAnchor.constraint(equalTo: statsContainerView.bottomAnchor, constant: -4),
             
-            // Equal Width for Stats Columns
             yearsStackView.widthAnchor.constraint(equalTo: coffeesStackView.widthAnchor),
             coffeesStackView.widthAnchor.constraint(equalTo: bugsStackView.widthAnchor)
         ])

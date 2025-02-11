@@ -43,7 +43,7 @@ class QuestionsViewController: UIViewController, UIScrollViewDelegate {
         
         guard let engineerCardView = EngineerCardView.loadView() else { return }
         
-        engineerCardView.setUp(with: engineer)
+        engineerCardView.setUp(with: engineer, parentVC: self)
         
         containerStack.insertArrangedSubview(engineerCardView, at: 0)
         

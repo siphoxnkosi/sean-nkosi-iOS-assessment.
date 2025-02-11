@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EngineerCardView: UIView {
+class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var engineerImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -22,12 +22,15 @@ class EngineerCardView: UIView {
     @IBOutlet weak var coffeesLabel: UILabel!
     @IBOutlet weak var bugsLabel: UILabel!
     
+    private var parentViewController: UIViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
     }
     
-    func setUp(with engineer: Engineer) {
+    func setUp(with engineer: Engineer, parentVC: UIViewController) {
+        self.parentViewController = parentVC
         configureImage(for: engineer)
         configureLabels(for: engineer)
     }
@@ -38,6 +41,36 @@ class EngineerCardView: UIView {
         applyTextStyling()
         applyStatsContainerStyling()
         applyConstraints()
+        addTapGesture()
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
+        engineerImageView.isUserInteractionEnabled = true
+        engineerImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func didTapImage() {
+        guard let parentVC = parentViewController else { return }
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        
+        parentVC.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let selectedImage = info[.editedImage] as? UIImage {
+            engineerImageView.image = selectedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            engineerImageView.image = originalImage
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
     private func configureImage(for engineer: Engineer) {

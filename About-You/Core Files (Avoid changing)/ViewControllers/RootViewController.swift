@@ -44,14 +44,13 @@ class RootScreenController {
     }
 
     private func showStartScreen() {
-        let viewController = IntroductionViewController.init(nibName: String.init(describing: IntroductionViewController.self),
-                                                                         bundle: Bundle(for: IntroductionViewController.self))
+        let viewController = IntroductionViewController.init(coreDataManager: CoreDataManager.shared)
         rootViewController.removeAllChildren()
         rootViewController.add(viewController, frame: rootViewFrame)
     }
 
     private func showEngineerScreen() {
-        let controller = EngineersTableViewController(style: .grouped)
+        let controller = EngineersTableViewController(coreDataManager: CoreDataManager.shared)
         let navigationController = UINavigationController(rootViewController: controller)
         rootViewController.removeAllChildren()
         rootViewController.add(navigationController, frame: rootViewFrame)

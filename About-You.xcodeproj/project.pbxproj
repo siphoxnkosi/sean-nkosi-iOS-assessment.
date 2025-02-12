@@ -49,6 +49,7 @@
 		CBB5837C2D5C72D400F6E7C9 /* EngineersSortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB5837B2D5C72D400F6E7C9 /* EngineersSortingTests.swift */; };
 		CBB5837E2D5C72ED00F6E7C9 /* EngineerCardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB5837D2D5C72ED00F6E7C9 /* EngineerCardViewTests.swift */; };
 		CBB583852D5C8B9800F6E7C9 /* OrderByDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB583842D5C8B9800F6E7C9 /* OrderByDelegate.swift */; };
+		CBB583882D5CC45F00F6E7C9 /* CoreDataManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB583872D5CC45F00F6E7C9 /* CoreDataManaging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		CBB5837B2D5C72D400F6E7C9 /* EngineersSortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineersSortingTests.swift; sourceTree = "<group>"; };
 		CBB5837D2D5C72ED00F6E7C9 /* EngineerCardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineerCardViewTests.swift; sourceTree = "<group>"; };
 		CBB583842D5C8B9800F6E7C9 /* OrderByDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderByDelegate.swift; sourceTree = "<group>"; };
+		CBB583872D5CC45F00F6E7C9 /* CoreDataManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManaging.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB583842D5C8B9800F6E7C9 /* OrderByDelegate.swift */,
+				CBB583872D5CC45F00F6E7C9 /* CoreDataManaging.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 			files = (
 				5DD01B5E27049AFA0032C29A /* UIView+Extension.swift in Sources */,
 				5D8DA22B26E0104C00418960 /* RootViewController.swift in Sources */,
+				CBB583882D5CC45F00F6E7C9 /* CoreDataManaging.swift in Sources */,
 				5D93CE2E2707306600D5059C /* OrderByTableViewController.swift in Sources */,
 				CBB5836E2D5B4E5700F6E7C9 /* CoreDataManager.swift in Sources */,
 				5D90F2E426DB774400EFA4A8 /* About_You.xcdatamodeld in Sources */,
@@ -733,7 +737,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 69XM53S226;
+				DEVELOPMENT_TEAM = RYH4BJX87K;
 				INFOPLIST_FILE = "About-You/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -752,7 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 69XM53S226;
+				DEVELOPMENT_TEAM = RYH4BJX87K;
 				INFOPLIST_FILE = "About-You/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

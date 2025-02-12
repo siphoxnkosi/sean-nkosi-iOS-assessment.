@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class CoreDataManager {
+class CoreDataManager: CoreDataManaging {
     static let shared = CoreDataManager()
 
     private let persistentContainer: NSPersistentContainer

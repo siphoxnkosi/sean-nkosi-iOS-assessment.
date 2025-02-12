@@ -2,6 +2,16 @@ import UIKit
 
 class EngineersTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, OrderByDelegate {
     var engineers: [Engineer] = Engineer.testingData()
+    private let coreDataManager: CoreDataManaging
+    
+    init(coreDataManager: CoreDataManaging) {
+        self.coreDataManager = coreDataManager
+        super.init(style: .grouped)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +26,6 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
         reloadEngineerImages()
     }
     private func reloadEngineerImages() {
-        
         for i in 0..<engineers.count {
             if let imageData = CoreDataManager.shared.fetchEngineerImage(name: engineers[i].name) {
                 engineers[i].quickStats = engineers[i].quickStats
@@ -80,7 +89,7 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
         }
         
         let engineer = engineers[indexPath.row]
-        cell.setUp(with: engineer)
+        cell.setUp(with: engineer, coreDataManager: coreDataManager)
         
         cell.accessoryType = .disclosureIndicator
         return cell

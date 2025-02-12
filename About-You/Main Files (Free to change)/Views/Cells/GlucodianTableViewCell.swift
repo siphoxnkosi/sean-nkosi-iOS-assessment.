@@ -5,19 +5,22 @@ class GlucodianTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var roleLabel: UILabel!
     
+    private var coreDataManager: CoreDataManaging?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupStyling()
     }
     
-    func setUp(with name: String, role: String) {
-        nameLabel.text = name
-        roleLabel.text = role
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImage.image = UIImage(systemName: "person.fill")
     }
     
-    func setUp(with engineer: Engineer) {
+    func setUp(with engineer: Engineer, coreDataManager: CoreDataManaging) {
         nameLabel.text = engineer.name
         roleLabel.text = engineer.role
+        self.coreDataManager = coreDataManager
         configureProfileImage(for: engineer)
     }
     
@@ -28,11 +31,6 @@ class GlucodianTableViewCell: UITableViewCell {
             return
         } else if !engineer.defaultImageName.isEmpty {
             profileImage.image = UIImage(named: engineer.defaultImageName)
-        } else {
-            let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium)
-            profileImage.image = UIImage(systemName: "person.fill", withConfiguration: config)
-            profileImage.tintColor = .systemBlue
-            profileImage.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         }
     }
     

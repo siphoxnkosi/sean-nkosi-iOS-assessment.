@@ -1,8 +1,6 @@
 import UIKit
 
-protocol OrderByDelegate: AnyObject {
-    func didSelectOrder(by criterion: String)
-}
+
 
 class OrderByTableViewController: UITableViewController {
     

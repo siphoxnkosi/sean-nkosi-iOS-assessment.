@@ -17,6 +17,7 @@ class QuestionsViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         view.backgroundColor = .white
         title = "About"
         scrollView.delegate = self

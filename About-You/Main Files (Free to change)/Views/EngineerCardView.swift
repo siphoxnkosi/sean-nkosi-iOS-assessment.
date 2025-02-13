@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -56,12 +57,66 @@ class EngineerCardView: UIView, UIImagePickerControllerDelegate, UINavigationCon
     @objc private func didTapImage() {
         guard let parentVC = parentViewController else { return }
         
-        DispatchQueue.main.async {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = true
-            parentVC.present(imagePicker, animated: true, completion: nil)
+        let alert = UIAlertController(
+            title: "Photo Library Access",
+            message: "Do you allow access to your photo library to upload a profile picture?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Allow", style: .default) { _ in
+            self.requestPhotoLibraryAccess { granted in
+                if granted {
+                    DispatchQueue.main.async {
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.delegate = self
+                        imagePicker.sourceType = .photoLibrary
+                        imagePicker.allowsEditing = true
+                        parentVC.present(imagePicker, animated: true)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSettingsAlert()
+                    }
+                }
+            }
+        })
+        
+        parentVC.present(alert, animated: true)
+    }
+    
+    private func showSettingsAlert() {
+        let alert = UIAlertController(
+            title: "Permission Denied",
+            message: "Please enable photo library access in Settings to upload a profile picture.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        })
+        
+        parentViewController?.present(alert, animated: true)
+    }
+    
+    
+    private func requestPhotoLibraryAccess(completion: @escaping (Bool) -> Void) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .authorized:
+            completion(true)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { newStatus in
+                DispatchQueue.main.async {
+                    completion(newStatus == .authorized)
+                }
+            }
+        default:
+            completion(false) 
         }
     }
     

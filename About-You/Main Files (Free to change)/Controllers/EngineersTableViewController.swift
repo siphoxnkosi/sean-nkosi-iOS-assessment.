@@ -16,6 +16,7 @@ class EngineersTableViewController: UITableViewController, UIPopoverPresentation
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Engineers at Glucode"
+        overrideUserInterfaceStyle = .light
         tableView.backgroundColor = .white
         registerCells()
     }
